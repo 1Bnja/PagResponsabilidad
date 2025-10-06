@@ -399,11 +399,11 @@
 
     <nav>
         <div class="nav-content">
-            <button class="nav-btn active" onclick="showSection('inicio')">Inicio</button>
-            <button class="nav-btn" onclick="showSection('sexualidad')">Sexualidad</button>
-            <button class="nav-btn" onclick="showSection('genero')">Género</button>
-            <button class="nav-btn" onclick="showSection('sexo')">Sexo</button>
-            <button class="nav-btn" onclick="showSection('identidad')">Identidad</button>
+            <button class="nav-btn active" aria-pressed="true" onclick="showSection('inicio', this)">Inicio</button>
+            <button class="nav-btn" aria-pressed="false" onclick="showSection('sexualidad', this)">Sexualidad</button>
+            <button class="nav-btn" aria-pressed="false" onclick="showSection('genero', this)">Género</button>
+            <button class="nav-btn" aria-pressed="false" onclick="showSection('sexo', this)">Sexo</button>
+            <button class="nav-btn" aria-pressed="false" onclick="showSection('identidad', this)">Identidad</button>
         </div>
     </nav>
 
@@ -567,7 +567,7 @@
     </footer>
 
     <script>
-        function showSection(sectionId) {
+        function showSection(sectionId, clickedButton) {
             // Ocultar todas las secciones
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
@@ -579,10 +579,14 @@
 
             // Actualizar botones de navegación
             const buttons = document.querySelectorAll('.nav-btn');
-            buttons.forEach(button => {
-                button.classList.remove('active');
+            buttons.forEach(navButton => {
+                navButton.classList.remove('active');
+                navButton.setAttribute('aria-pressed', 'false');
             });
-            event.target.classList.add('active');
+            if (clickedButton) {
+                clickedButton.classList.add('active');
+                clickedButton.setAttribute('aria-pressed', 'true');
+            }
 
             // Scroll suave al inicio
             window.scrollTo({ top: 0, behavior: 'smooth' });
