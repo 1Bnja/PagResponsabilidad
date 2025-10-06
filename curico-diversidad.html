@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diversidad Sexual - Municipalidad de Curicó</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #4CAF50;
+            --dark-green: #2E7D32;
+            --light-bg: #f5f5f5;
+            --card-bg: #ffffff;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --rainbow-1: #FF0018;
+            --rainbow-2: #FFA52C;
+            --rainbow-3: #FFFF41;
+            --rainbow-4: #008018;
+            --rainbow-5: #0000F9;
+            --rainbow-6: #86007D;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 18px; /* base larger for better readability */
+            line-height: 1.7;
+            color: var(--text-dark);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .rainbow-bar {
+            height: 6px;
+            background: linear-gradient(to right, 
+                var(--rainbow-1) 0%, 
+                var(--rainbow-2) 16.66%, 
+                var(--rainbow-3) 33.33%, 
+                var(--rainbow-4) 50%, 
+                var(--rainbow-5) 66.66%, 
+                var(--rainbow-6) 100%);
+        }
+
+        header {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .logo {
+            max-width: 250px;
+            height: auto;
+            display: block;
+        }
+
+        /* Logo when placed above the title */
+        .logo-top {
+            display: block;
+            margin: 0 auto 0.6rem;
+            width: 140px;
+            height: auto;
+        }
+
+        /* Responsive logo sizing (general) */
+        .logo-img {
+            width: 220px;
+            height: auto;
+        }
+
+        .header-text {
+            flex: 0 0 auto;
+            text-align: center;
+        }
+
+        .header-text h1 {
+            color: var(--dark-green);
+            font-size: 2.4rem; /* larger title */
+            margin-bottom: 0.4rem;
+        }
+
+        .header-text p {
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        nav {
+            background: var(--primary-green);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: white;
+            padding: 1.25rem 1.75rem;
+            cursor: pointer;
+            font-size: 1.05rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            white-space: nowrap;
+            border-bottom: 3px solid transparent;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .nav-btn.active {
+            background: rgba(255,255,255,0.2);
+            border-bottom-color: white;
+        }
+
+        main {
+            flex: 1 0 auto;
+            max-width: 1200px;
+            margin: 2.5rem auto; /* more breathing room */
+            padding: 0 2.5rem;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Center the intro card in the #inicio section */
+        #inicio {
+            display: flex;
+            justify-content: center; /* horizontal center */
+            align-items: flex-start;  /* keep content at top */
+            padding-top: 1rem;
+            width: 100%;
+        }
+
+        /* Make the intro card wider and force centering if layout shifts */
+        #inicio .intro-section {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto 2.5rem;
+            align-self: center; /* center inside flex container */
+            box-sizing: border-box;
+        }
+
+        .section-header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+            margin-bottom: 0;
+        }
+
+        .section-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        .cards-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-left: 5px solid var(--primary-green);
+            padding: 1.75rem;
+            margin-bottom: 1.75rem;
+            border-radius: 10px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-left-width: 6px;
+        }
+
+        .card h3 {
+            color: var(--dark-green);
+            font-size: 1.6rem;
+            margin-bottom: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-icon {
+            width: 24px;
+            height: 24px;
+            background: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .card p {
+            color: var(--text-light);
+            line-height: 1.9;
+            font-size: 1.1rem;
+        }
+
+        .intro-section {
+            background: white;
+            padding: 4.5rem 4rem; /* larger padding */
+            border-radius: 18px;
+            box-shadow: 0 8px 36px rgba(0,0,0,0.14);
+            text-align: center;
+            margin: 0 auto 3rem;
+            max-width: 1200px; /* wider card */
+            width: 95%;
+        }
+
+        .intro-section h2 {
+            color: var(--dark-green);
+            font-size: 3.25rem; /* much larger title */
+            margin-bottom: 1rem;
+            line-height: 1.05;
+        }
+
+        .intro-section p {
+            color: var(--text-light);
+            font-size: 1.25rem; /* larger paragraph */
+            max-width: 1000px;
+            margin: 0 auto 2.25rem;
+            line-height: 1.95;
+        }
+
+        .diversity-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .diversity-icon {
+            width: 96px;
+            height: 96px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            color: white;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .diversity-icon:nth-child(1) { background: var(--rainbow-1); animation-delay: 0s; }
+        .diversity-icon:nth-child(2) { background: var(--rainbow-2); animation-delay: 0.5s; }
+        .diversity-icon:nth-child(3) { background: var(--rainbow-3); color: var(--text-dark); animation-delay: 1s; }
+        .diversity-icon:nth-child(4) { background: var(--rainbow-4); animation-delay: 1.5s; }
+        .diversity-icon:nth-child(5) { background: var(--rainbow-5); animation-delay: 2s; }
+        .diversity-icon:nth-child(6) { background: var(--rainbow-6); animation-delay: 2.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        footer {
+            background: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 0;
+            flex-shrink: 0;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            /* Make intro card full width on small screens */
+            #inicio .intro-section {
+                width: 95%;
+                padding: 2rem 1.25rem;
+            }
+
+            .logo {
+                max-width: 200px;
+            }
+
+            .header-text h1 {
+                font-size: 1.4rem;
+            }
+
+            .nav-content {
+                padding: 0 1rem;
+            }
+
+            .nav-btn {
+                padding: 0.8rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .intro-section {
+                padding: 2rem 1.5rem;
+            }
+
+            .intro-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="rainbow-bar"></div>
+    
+    <header>
+        <div class="header-content">
+            <div class="header-text">
+                <img src="cropped-logoc-2.jpg" alt="Logo Municipalidad de Curicó" class="logo-top" role="img">
+                <h1>Diversidad Sexual e Identidad de Género</h1>
+                <p>Información y conceptos para una sociedad más inclusiva</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="nav-content">
+            <button class="nav-btn active" onclick="showSection('inicio')">Inicio</button>
+            <button class="nav-btn" onclick="showSection('sexualidad')">Sexualidad</button>
+            <button class="nav-btn" onclick="showSection('genero')">Género</button>
+            <button class="nav-btn" onclick="showSection('sexo')">Sexo</button>
+            <button class="nav-btn" onclick="showSection('identidad')">Identidad</button>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Sección Inicio -->
+        <section id="inicio" class="section active">
+            <div class="intro-section">
+                <h2>Bienvenidos</h2>
+                <p>Esta plataforma tiene como objetivo educar y promover el respeto hacia la diversidad sexual e identidad de género. Aquí encontrarás información clara sobre conceptos fundamentales para construir una sociedad más inclusiva y respetuosa.</p>
+                
+                <div class="diversity-icons">
+                    <div class="diversity-icon">🏳️‍🌈</div>
+                    <div class="diversity-icon">❤️</div>
+                    <div class="diversity-icon">🤝</div>
+                    <div class="diversity-icon">✨</div>
+                    <div class="diversity-icon">🌟</div>
+                    <div class="diversity-icon">💫</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sexualidad -->
+        <section id="sexualidad" class="section">
+            <div class="section-header">
+                <h2>Sexualidad</h2>
+                <p>Conoce las diferentes orientaciones sexuales y conceptos relacionados</p>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">G</span>Gay</h3>
+                    <p>Persona que siente atracción emocional, afectiva y sexual hacia personas de su mismo sexo. Tradicionalmente se utiliza para hablar de hombres que se sienten atraídos hacia otros hombres.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">L</span>Lesbiana</h3>
+                    <p>Mujer que siente atracción emocional, afectiva y sexual hacia otras mujeres.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">B</span>Bisexual</h3>
+                    <p>Persona que siente atracción emocional, afectiva y sexual hacia hombres y mujeres.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">+</span>LGBTIQA+</h3>
+                    <p>Acrónimo comúnmente utilizado para denominar la diversidad de orientaciones e identidades de género. Se refiere a: Lesbiana, Gay, Transgénero, Bisexual, Intersexual, Queer, Asexual y más.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">🌈</span>Diversidades Sexuales</h3>
+                    <p>Se refiere a todas las posibilidades que tienen las personas de asumir, expresar y vivir su sexualidad, así como también de elegir las expresiones, orientaciones e identidades sexuales según su preferencia. Reconoce la pluralidad y variedad de posibilidades que existen.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">⚠</span>Heteronormatividad</h3>
+                    <p>Se le considera como un modelo social y cultural que impone que la heterosexualidad sea la única orientación sexual 'normal', natural y aceptada.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">✋</span>Homofobia</h3>
+                    <p>Término que se utiliza para designar toda conducta de odio, rechazo, prejuicio y/o discriminación hacia las personas que tienen una orientación sexual hacia su mismo sexo, ya sea hombres y mujeres, o diferente a la heterosexualidad y/o pertenecientes a las diversidades sexuales.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">∩</span>Interseccionalidad</h3>
+                    <p>Concepto utilizado para describir la complejidad de la discriminación que implica más de un motivo. Se utiliza generalmente para describir la situación en la que una persona se enfrenta a más de un motivo de discriminación, por ejemplo: discriminación por razón de sexo y discapacidad, o género y orientación sexual.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Género -->
+        <section id="genero" class="section">
+            <div class="section-header">
+                <h2>Género</h2>
+                <p>Comprende las construcciones sociales y culturales sobre lo femenino y lo masculino</p>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">⚧</span>Género</h3>
+                    <p>Ideas, creencias y atribuciones sociales a partir de las cuales una cultura simboliza y determina lo que es "propio" de los hombres y lo que es "propio" de las mujeres. Es una construcción social y cultural de lo femenino y lo masculino, por tanto es transformable. Se refiere a los roles, comportamientos, actividades y atributos que una sociedad determinada en una época determinada considera apropiados para hombres y mujeres.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">🆔</span>Identidad de Género</h3>
+                    <p>Proceso performativo el cual lleva a adquirir una identidad (hombre, mujer, no-binario). La identidad de género no siempre se corresponde con el sexo asignado al nacer. La ley entiende la identidad de género como la convicción personal e interna de ser hombre o mujer, tal como la persona se percibe a sí misma. Esto puede o no corresponder con el sexo y nombre que figura en el acta de inscripción de nacimiento.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">👤</span>Expresión de Género</h3>
+                    <p>Manifestación del género de una persona, que puede estar o no ligada a la identidad de género. Es visible en la forma de hablar, modo de vestir, comportamiento corporal, etc.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">📊</span>Estereotipos de Género</h3>
+                    <p>Esquemas culturales que generalizan los atributos de género, los roles individuales y colectivos y las diferencias según el sexo y el género. Son creencias rígidas y atributos generalizados en torno a los roles que deben cumplir hombres y mujeres en la sociedad, cómo deben comportarse y relacionarse entre sí. De los estereotipos de género emergen prejuicios y valorizaciones diferenciadas que derivan en prácticas de discriminación.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">⚖</span>Sesgos de Género</h3>
+                    <p>Aproximaciones o definiciones sistemáticamente erróneas de la realidad, que ubican o miran a las mujeres y a los hombres de manera diferente y desigual.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">⛔</span>Sexismo</h3>
+                    <p>Conjunto de prácticas discriminatorias basadas en estereotipos y roles de género que pueden tener consecuencias perjudiciales para las personas afectadas.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Sexo -->
+        <section id="sexo" class="section">
+            <div class="section-header">
+                <h2>Sexo</h2>
+                <p>Aspectos biológicos y su relación con el género</p>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">🧬</span>Sexo</h3>
+                    <p>Características biológicas de las personas, las cuales vienen determinadas al nacer. El sexo establece diferencias biológicas dependiendo si se nace hombre (aparato reproductivo masculino) o mujer (aparato reproductivo femenino). Sin embargo, también existen personas que nacen con características de ambos aparatos reproductivos, las cuales se identifican como intersex. El sexo de una persona no necesariamente se condice con su género, ya que una persona puede nacer con sexo femenino y tener una "identidad de género" femenina, masculina u otra identidad.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">⚤</span>Intersexual</h3>
+                    <p>Persona que ha nacido con órganos reproductivos o sexuales que varían respecto del estándar fisiológico de hombres y mujeres culturalmente vigente.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">🔄</span>Sistema Sexo/Género</h3>
+                    <p>Es una categoría de análisis que permite cuestionar valores y creencias en las relaciones entre los sexos. Este sistema trata de explicar cómo, basándose única y exclusivamente en la diferencia del sexo con el que se nace cada persona, se ha creado todo un conjunto de creencias, valores, costumbres, normas, prácticas, oportunidades y comportamientos sociales diferentes para ambos sexos. Mientras el sexo es entendido como la diferencia sexual anatómica, el género es definido como una construcción sociocultural.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección Identidad -->
+        <section id="identidad" class="section">
+            <div class="section-header">
+                <h2>Identidad</h2>
+                <p>Conceptos relacionados con la identidad de género</p>
+            </div>
+            <div class="cards-container">
+                <div class="card">
+                    <h3><span class="card-icon">T</span>Transgénero</h3>
+                    <p>Término general referido a personas cuya identidad y/o expresión de género no se corresponde con las normas y expectativas sociales, tradicionalmente asociadas con el sexo asignado al nacer.</p>
+                </div>
+
+                <div class="card">
+                    <h3><span class="card-icon">C</span>Cisgénero</h3>
+                    <p>Persona cuya identidad de género corresponde con el sexo asignado al nacer.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="rainbow-bar" style="margin-bottom: 1rem;"></div>
+            <p><strong>Municipalidad de Curicó</strong></p>
+            <p>#Unidos por una sociedad más inclusiva y respetuosa</p>
+            <p style="margin-top: 1rem; opacity: 0.8;">© 2025 - Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(sectionId) {
+            // Ocultar todas las secciones
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Mostrar la sección seleccionada
+            document.getElementById(sectionId).classList.add('active');
+
+            // Actualizar botones de navegación
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(button => {
+                button.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Scroll suave al inicio
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Animación de entrada
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
