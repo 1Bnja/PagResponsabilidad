@@ -30,7 +30,7 @@
             display: flex;
             flex-direction: column;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 18px; /* base larger for better readability */
+            font-size: clamp(16px, 1.5vw, 18px);
             line-height: 1.7;
             color: var(--text-dark);
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
@@ -59,11 +59,12 @@
         .header-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1.5rem 2rem;
+            padding: clamp(1rem, 3vw, 1.5rem) clamp(1rem, 4vw, 2rem);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 2rem;
+            gap: clamp(1rem, 4vw, 2rem);
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -93,13 +94,13 @@
 
         .header-text h1 {
             color: var(--dark-green);
-            font-size: 2.4rem; /* larger title */
+            font-size: clamp(1.9rem, 4vw, 2.4rem);
             margin-bottom: 0.4rem;
         }
 
         .header-text p {
             color: var(--text-light);
-            font-size: 1.05rem;
+            font-size: clamp(1rem, 2.2vw, 1.1rem);
         }
 
         nav {
@@ -110,10 +111,12 @@
         .nav-content {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 clamp(1rem, 4vw, 2rem);
             display: flex;
             gap: 0.5rem;
             overflow-x: auto;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .nav-btn {
@@ -140,9 +143,9 @@
 
         main {
             flex: 1 0 auto;
-            max-width: 1200px;
-            margin: 2.5rem auto; /* more breathing room */
-            padding: 0 2.5rem;
+            width: min(1200px, 100%);
+            margin: clamp(1.75rem, 4vw, 2.75rem) auto;
+            padding: 0 clamp(1.25rem, 4vw, 2.5rem);
         }
 
         .section {
@@ -170,9 +173,9 @@
 
         /* Make the intro card wider and force centering if layout shifts */
         #inicio .intro-section {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto 2.5rem;
+            width: min(100%, 1100px);
+            max-width: 1100px;
+            margin: 0 auto;
             align-self: center; /* center inside flex container */
             box-sizing: border-box;
         }
@@ -180,7 +183,7 @@
         .section-header {
             background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
             color: white;
-            padding: 2rem;
+            padding: clamp(1.5rem, 4vw, 2rem);
             border-radius: 15px 15px 0 0;
             margin-bottom: 0;
         }
@@ -197,19 +200,22 @@
 
         .cards-container {
             background: white;
-            padding: 2rem;
+            padding: clamp(1.5rem, 4vw, 2.25rem);
             border-radius: 0 0 15px 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: clamp(1.25rem, 4vw, 2rem);
         }
 
         .card {
             background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
             border-left: 5px solid var(--primary-green);
-            padding: 1.75rem;
-            margin-bottom: 1.75rem;
+            padding: clamp(1.25rem, 3vw, 1.75rem);
             border-radius: 10px;
             box-shadow: 0 6px 18px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            height: 100%;
         }
 
         .card:hover {
@@ -220,7 +226,7 @@
 
         .card h3 {
             color: var(--dark-green);
-            font-size: 1.6rem;
+            font-size: clamp(1.2rem, 2.5vw, 1.6rem);
             margin-bottom: 0.9rem;
             display: flex;
             align-items: center;
@@ -242,52 +248,52 @@
 
         .card p {
             color: var(--text-light);
-            line-height: 1.9;
-            font-size: 1.1rem;
+            line-height: 1.8;
+            font-size: clamp(1rem, 2vw, 1.1rem);
         }
 
         .intro-section {
             background: white;
-            padding: 4.5rem 4rem; /* larger padding */
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(2rem, 6vw, 4rem);
             border-radius: 18px;
             box-shadow: 0 8px 36px rgba(0,0,0,0.14);
             text-align: center;
-            margin: 0 auto 3rem;
-            max-width: 1200px; /* wider card */
-            width: 95%;
+            margin: 0 auto clamp(2rem, 5vw, 3rem);
+            max-width: 1200px;
+            width: min(95%, 1100px);
         }
 
         .intro-section h2 {
             color: var(--dark-green);
-            font-size: 3.25rem; /* much larger title */
+            font-size: clamp(2rem, 4vw, 3rem);
             margin-bottom: 1rem;
-            line-height: 1.05;
+            line-height: 1.1;
         }
 
         .intro-section p {
             color: var(--text-light);
-            font-size: 1.25rem; /* larger paragraph */
-            max-width: 1000px;
-            margin: 0 auto 2.25rem;
-            line-height: 1.95;
+            font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+            max-width: 900px;
+            margin: 0 auto clamp(1.75rem, 4vw, 2.25rem);
+            line-height: 1.85;
         }
 
         .diversity-icons {
             display: flex;
             justify-content: center;
-            gap: 2rem;
+            gap: clamp(1.25rem, 4vw, 2rem);
             flex-wrap: wrap;
-            margin-top: 2rem;
+            margin-top: clamp(1.5rem, 4vw, 2.5rem);
         }
 
         .diversity-icon {
-            width: 96px;
-            height: 96px;
+            width: clamp(72px, 12vw, 96px);
+            height: clamp(72px, 12vw, 96px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.4rem;
+            font-size: clamp(1.8rem, 6vw, 2.4rem);
             color: white;
             animation: float 3s ease-in-out infinite;
         }
@@ -308,7 +314,7 @@
             background: var(--dark-green);
             color: white;
             text-align: center;
-            padding: 2rem;
+            padding: clamp(1.5rem, 4vw, 2.5rem);
             margin-top: 0;
             flex-shrink: 0;
         }
@@ -328,9 +334,8 @@
                 text-align: center;
             }
 
-            /* Make intro card full width on small screens */
             #inicio .intro-section {
-                width: 95%;
+                width: 100%;
                 padding: 2rem 1.25rem;
             }
 
@@ -342,29 +347,39 @@
                 font-size: 1.4rem;
             }
 
-            .nav-content {
-                padding: 0 1rem;
-            }
-
             .nav-btn {
-                padding: 0.8rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            main {
-                padding: 0 1rem;
+                padding: 0.85rem 1.1rem;
+                font-size: 0.95rem;
             }
 
             .section-header h2 {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .nav-btn {
+                flex: 1 1 calc(50% - 0.5rem);
+                white-space: normal;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-content {
+                justify-content: flex-start;
+            }
+
+            .nav-btn {
+                flex: 1 1 100%;
+            }
+
+            .card {
+                padding: 1.25rem;
             }
 
             .intro-section {
-                padding: 2rem 1.5rem;
-            }
-
-            .intro-section h2 {
-                font-size: 1.8rem;
+                border-radius: 16px;
             }
         }
     </style>
